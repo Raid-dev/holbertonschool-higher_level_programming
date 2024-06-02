@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 """ Matrix Division module """
 
+
 def matrix_divided(matrix, div):
     """ Divides matrix """
+    if not isinstance(matrix, list) or len(matrix) == 0:
+        raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
     new_matrix = []
     for i in range(len(matrix)):
         if not isinstance(matrix[i], list):
