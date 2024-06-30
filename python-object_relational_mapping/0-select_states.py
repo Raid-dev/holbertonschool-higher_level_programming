@@ -1,20 +1,23 @@
 #!/usr/bin/python3
-"""
-    Lists all states from the database hbtn_0e_0_usa.
-"""
-import sys
-import MySQLdb
+"""Module for Selecting states"""
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    from sys import argv
+    import MySQLdb
+
     db = MySQLdb.connect(
-            host="localhost",
-            port=3306,
-            user=sys.argv[1],
-            passwd=sys.argv[2],
-            db=sys.argv[3])
+        user=argv[1],
+        password=argv[2],
+        database=argv[3]
+    )
+    cursor = db.cursor()
 
-    c = db.cursor()
-    c.execute("SELECT * FROM states ORDER BY id")
-    [print(state) for state in c.fetchall()]
-    c.close()
-    db.close()
+    cursor.execute('SELECT * FROM states')
+
+    for state in cursor.fetchall():
+        print(state)
+
+    if cursor:
+        cursor.close()
+    if db:
+        db.close()
